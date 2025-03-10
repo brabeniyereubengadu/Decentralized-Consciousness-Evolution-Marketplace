@@ -1,30 +1,27 @@
+;; Consciousness Level Certification Contract - Simplified
 
-;; title: consciousness-level-certification
-;; version:
-;; summary:
-;; description:
+(define-map certifications
+  { entity: principal }
+  {
+    level: uint,
+    score: uint
+  }
+)
 
-;; traits
-;;
+(define-public (certify-consciousness (entity principal) (score uint))
+  (let ((level (if (>= score u500) u2 u1)))
+    (map-set certifications
+      { entity: entity }
+      {
+        level: level,
+        score: score
+      }
+    )
+    (ok level)
+  )
+)
 
-;; token definitions
-;;
-
-;; constants
-;;
-
-;; data vars
-;;
-
-;; data maps
-;;
-
-;; public functions
-;;
-
-;; read only functions
-;;
-
-;; private functions
-;;
+(define-read-only (get-certification (entity principal))
+  (map-get? certifications { entity: entity })
+)
 
