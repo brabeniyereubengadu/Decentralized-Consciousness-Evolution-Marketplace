@@ -1,30 +1,43 @@
+;; Mind Expansion Experience Verification Contract - Simplified
 
-;; title: mind-expansion-experience-verification
-;; version:
-;; summary:
-;; description:
+(define-map experiences
+  { id: uint }
+  {
+    experiencer: principal,
+    type: (string-ascii 50),
+    verified: bool
+  }
+)
 
-;; traits
-;;
+(define-data-var next-id uint u1)
 
-;; token definitions
-;;
+(define-public (register-experience (type (string-ascii 50)))
+  (let ((id (var-get next-id)))
+    (map-set experiences
+      { id: id }
+      {
+        experiencer: tx-sender,
+        type: type,
+        verified: false
+      }
+    )
+    (var-set next-id (+ id u1))
+    (ok id)
+  )
+)
 
-;; constants
-;;
+(define-public (verify-experience (id uint))
+  (let ((experience (default-to { experiencer: tx-sender, type: "", verified: false }
+                               (map-get? experiences { id: id }))))
+    (map-set experiences
+      { id: id }
+      (merge experience { verified: true })
+    )
+    (ok true)
+  )
+)
 
-;; data vars
-;;
-
-;; data maps
-;;
-
-;; public functions
-;;
-
-;; read only functions
-;;
-
-;; private functions
-;;
+(define-read-only (get-experience (id uint))
+  (map-get? experiences { id: id })
+)
 

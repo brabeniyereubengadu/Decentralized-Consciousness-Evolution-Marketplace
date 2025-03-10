@@ -9,3 +9,7 @@ a
 0contracts/consciousness-level-certification.clar,1/8/189c58bb727383b60d5b695e794acbde1951049e
 _
 /tests/consciousness-level-certification.test.ts,7/b/7b464c481108f2845c2b693db02d1530125ab298
+e
+5contracts/mind-expansion-experience-verification.clar,4/f/4f11c22b5ed1e62c592d4d6786af1c2132959554
+d
+4tests/mind-expansion-experience-verification.test.ts,6/8/688c5e0586918b5de9e847908e0d09b7f5a979bf
